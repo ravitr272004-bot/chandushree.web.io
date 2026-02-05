@@ -10,10 +10,9 @@
 <style>
 :root {
     --gold:#d4af37;
-    --maroon:#3b0101;
 }
-* {margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
-html,body {width:100%; height:100%; background:#000; color:white; font-family:'Montserrat',sans-serif; overflow-x:hidden;}
+* {margin:0; padding:0; box-sizing:border-box;}
+html,body {width:100%; height:100%; font-family:'Montserrat',sans-serif; overflow-x:hidden;}
 
 /* COMMON STAGES */
 .stage {
@@ -32,6 +31,8 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
     background-size:cover;
     background-position:center;
     min-height:100vh;
+    width:100%;
+    overflow-y:auto;
 }
 .stage.active {opacity:1; visibility:visible; transform:scale(1);}
 
@@ -49,7 +50,7 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 @keyframes orbPulse {0%,100%{transform:scale(1); box-shadow:0 0 20px rgba(212,175,55,.25);} 50%{transform:scale(1.08); box-shadow:0 0 50px rgba(212,175,55,.5);}}
 
 /* STAGE 2 */
-#stage2 {background:url('bgs2.jpg') center/cover no-repeat; overflow:hidden; min-height:100vh;}
+#stage2 {background:url('bgs2.jpg') center/cover no-repeat; overflow:hidden;}
 .drop {position:absolute; width:2px; background:var(--gold); animation:rain linear infinite;}
 @keyframes rain {to {transform:translateY(120vh); opacity:0;}}
 
@@ -63,22 +64,24 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 /* STAGE 4 */
 #stage4 {
     background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("bg2.jpg") center/cover no-repeat;
-    overflow-y:auto; justify-content:flex-start; padding:40px 20px 60px;
-    display:flex; flex-direction:column; align-items:center; min-height:100vh;
+    overflow-y:auto;
+    justify-content:flex-start;
+    padding:40px 20px 60px;
+    display:flex; flex-direction:column; align-items:center;
+    min-height:100vh;
 }
 
 /* GALLERY */
 .gallery {
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
     width:100%;
-    max-width:1000px;
-    margin:20px auto;
-    perspective:1000px;
+    max-width:1200px;
+    margin:30px auto;
 }
 .ar-img {
-    width:100%; height:180px; object-fit:cover; border-radius:18px;
+    width:100%; height:250px; object-fit:cover; border-radius:18px;
     box-shadow:0 25px 45px rgba(0,0,0,.35);
     opacity:0; transform:translateY(30px) scale(0.95);
     transition: transform 0.3s ease, opacity 0.8s ease;
@@ -86,23 +89,20 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 
 /* BUTTON */
 .btn {
-    padding:10px 24px; background:none; border:1px solid var(--gold);
-    color:var(--gold); font-family:'Cinzel'; letter-spacing:3px; cursor:pointer; margin-top:15px;
-    font-size:clamp(0.9rem,2vw,1.2rem);
+    padding:12px 36px; background:none; border:1px solid var(--gold);
+    color:var(--gold); font-family:'Cinzel'; letter-spacing:4px; cursor:pointer; margin-top:20px;
+    font-size:clamp(1rem,2vw,1.4rem);
 }
 
 /* QUOTE ANIMATION */
-@keyframes quoteGlow {
-    0%{box-shadow:0 0 10px #fff3b0,0 0 20px #ffb347;}
-    50%{box-shadow:0 0 20px #fff3b0,0 0 40px #ffb347;}
-    100%{box-shadow:0 0 10px #fff3b0,0 0 20px #ffb347;}
-}
+@keyframes quoteGlow {0%{box-shadow:0 0 10px #fff3b0,0 0 20px #ffb347;} 50%{box-shadow:0 0 20px #fff3b0,0 0 40px #ffb347;} 100%{box-shadow:0 0 10px #fff3b0,0 0 20px #ffb347;}}
 
 /* RESPONSIVE */
+@media(max-width:1200px){ .gallery{grid-template-columns:repeat(2,1fr);} .ar-img{height:220px;} }
 @media(max-width:768px){
-    .gallery{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
-    .ar-img{height:150px;}
-    .mystic-orb{width:120px;height:120px;}
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .ar-img{height:180px;}
+    .mystic-orb{width:140px;height:140px;}
 }
 @media(max-width:480px){
     .gallery{grid-template-columns:1fr;}
@@ -125,15 +125,15 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 <!-- STAGE 2 -->
 <div id="stage2" class="stage">
     <div id="rain"></div>
-    <h1 style="font-family:'Cinzel Decorative';letter-spacing:6px;color:var(--gold); font-size:clamp(1.5rem,4vw,2.2rem);">🤩<br>Let’s Celebrate <br>It's Your Day</h1>
+    <h1 style="font-family:'Cinzel Decorative';letter-spacing:6px;color:var(--gold); font-size:clamp(1.5rem,4vw,2.5rem);">🤩<br>Let’s Celebrate <br>It's Your Day</h1>
     <p style="font-family:'Cinzel Decorative';letter-spacing:3px;color:white; font-size:clamp(1rem,3vw,1.4rem);">⚡You're not getting older⚡<br>⚡It’s leveling up⚡</p>
     <button class="btn" onclick="go(3)">🎁 REVEAL</button>
 </div>
 
 <!-- STAGE 3 -->
 <div id="stage3" class="stage">
-    <div style="font-size:1.6rem;margin-bottom:18px;opacity:0;animation:fadeDown 1.2s forwards .3s;"><h1>👑👑👑</h1></div>
-    <div style="font-family:'Cinzel Decorative';font-size:2rem;letter-spacing:6px;margin-bottom:16px;color:#f5e6a8;">
+    <div style="font-size:1.8rem;margin-bottom:20px;opacity:0;animation:fadeDown 1.2s forwards .3s;"><h1>👑👑👑</h1></div>
+    <div style="font-family:'Cinzel Decorative';font-size:2.2rem;letter-spacing:6px;margin-bottom:16px;color:#f5e6a8;">
         <span style="opacity:0;animation:fadeIn .5s forwards .6s">H</span>
         <span style="opacity:0;animation:fadeIn .5s forwards .8s">a</span>
         <span style="opacity:0;animation:fadeIn .5s forwards 1s">p</span>
@@ -150,7 +150,7 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
         <span style="opacity:0;animation:fadeIn .5s forwards 3s">y</span>
     </div>
     <h1 style="font-family:'Cinzel Decorative';font-size:clamp(2rem,5vw,3rem);letter-spacing:6px;margin:10px 0;background:linear-gradient(to right,#bf953f,#fcf6ba,#b38728);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;animation:glowIn 2s forwards 3.8s;">CHANDUSHREE</h1>
-    <p style="letter-spacing:4px;margin-top:10px;color:#e7d28c;opacity:0;animation:fadeUp 1.5s forwards 5s; font-size:clamp(0.9rem,2.5vw,1.2rem);">13 · 02 · 2026</p>
+    <p style="letter-spacing:4px;margin-top:10px;color:#e7d28c;opacity:0;animation:fadeUp 1.5s forwards 5s; font-size:clamp(1rem,2.5vw,1.3rem);">13 · 02 · 2026</p>
     <button class="btn" style="color:rgb(104, 199, 199);margin-top:20px;opacity:0;animation:fadeUp 1.5s forwards 6s;" onclick="go(4)">🎂 FOR YOU</button>
 </div>
 
