@@ -31,31 +31,30 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
     transition:1s ease-in-out;
     background-size:cover;
     background-position:center;
+    min-height:100vh;
 }
 .stage.active {opacity:1; visibility:visible; transform:scale(1);}
 
-/* STAGE 2 */
-#stage2 {background:url('bgs1.jpg') center/cover no-repeat; overflow:hidden;}
-.drop {
-    position:absolute;
-    width:2px;
-    background:var(--gold);
-    animation:rain linear infinite;
+/* STAGE 1 */
+#stage1 {background:url('bgs1.jpg') center/cover no-repeat;}
+.mystic-orb {
+    width:160px; height:160px;
+    border:2px solid var(--gold);
+    border-radius:50%;
+    display:flex; justify-content:center; align-items:center;
+    cursor:pointer;
+    animation:orbPulse 4s infinite ease-in-out;
 }
-@keyframes rain {to {transform:translateY(120vh); opacity:0;}}
+.mystic-orb span {font-family:'Cinzel Decorative'; letter-spacing:5px; color:var(--gold);}
+@keyframes orbPulse {0%,100%{transform:scale(1); box-shadow:0 0 20px rgba(212,175,55,.25);} 50%{transform:scale(1.08); box-shadow:0 0 50px rgba(212,175,55,.5);}}
 
 /* STAGE 2 */
-#stage2 {background:url('bgs2.jpg') center/cover no-repeat; overflow:hidden;}
-.drop {
-    position:absolute;
-    width:2px;
-    background:var(--gold);
-    animation:rain linear infinite;
-}
+#stage2 {background:url('bgs2.jpg') center/cover no-repeat; overflow:hidden; min-height:100vh;}
+.drop {position:absolute; width:2px; background:var(--gold); animation:rain linear infinite;}
 @keyframes rain {to {transform:translateY(120vh); opacity:0;}}
 
 /* STAGE 3 */
-#stage3 {background:linear-gradient(rgba(196,86,86,0.55), rgba(0,0,0,0.55)), url("1bg.jpg") center/cover no-repeat;}
+#stage3 {background:linear-gradient(rgba(196,86,86,0.55), rgba(0,0,0,0.55)), url("1bg.jpg") center/cover no-repeat; min-height:100vh; padding:20px;}
 @keyframes fadeIn {from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp {from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);}}
 @keyframes fadeDown {from{opacity:0;transform:translateY(-20px);} to{opacity:1;transform:translateY(0);}}
@@ -65,21 +64,21 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 #stage4 {
     background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("bg2.jpg") center/cover no-repeat;
     overflow-y:auto; justify-content:flex-start; padding:40px 20px 60px;
-    display:flex; flex-direction:column; align-items:center;
+    display:flex; flex-direction:column; align-items:center; min-height:100vh;
 }
 
 /* GALLERY */
 .gallery {
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
     width:100%;
     max-width:1000px;
-    margin:40px auto;
+    margin:20px auto;
     perspective:1000px;
 }
 .ar-img {
-    width:100%; height:240px; object-fit:cover; border-radius:18px;
+    width:100%; height:180px; object-fit:cover; border-radius:18px;
     box-shadow:0 25px 45px rgba(0,0,0,.35);
     opacity:0; transform:translateY(30px) scale(0.95);
     transition: transform 0.3s ease, opacity 0.8s ease;
@@ -87,8 +86,9 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 
 /* BUTTON */
 .btn {
-    padding:12px 36px; background:none; border:1px solid var(--gold);
-    color:var(--gold); font-family:'Cinzel'; letter-spacing:4px; cursor:pointer; margin-top:20px;
+    padding:10px 24px; background:none; border:1px solid var(--gold);
+    color:var(--gold); font-family:'Cinzel'; letter-spacing:3px; cursor:pointer; margin-top:15px;
+    font-size:clamp(0.9rem,2vw,1.2rem);
 }
 
 /* QUOTE ANIMATION */
@@ -99,8 +99,19 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 }
 
 /* RESPONSIVE */
-@media(max-width:900px){.gallery{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));} .ar-img{height:200px;}}
-@media(max-width:480px){.gallery{grid-template-columns:1fr;} .ar-img{height:180px;} .mystic-orb{width:130px;height:130px;}}
+@media(max-width:768px){
+    .gallery{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
+    .ar-img{height:150px;}
+    .mystic-orb{width:120px;height:120px;}
+}
+@media(max-width:480px){
+    .gallery{grid-template-columns:1fr;}
+    .ar-img{height:130px;}
+    .mystic-orb{width:100px;height:100px;}
+    #stage3 h1{font-size:1.8rem;}
+    #stage3 div[style*="font-size:2rem"]{font-size:1.2rem; letter-spacing:3px;}
+    .btn{padding:8px 20px; font-size:1rem;}
+}
 </style>
 </head>
 <body>
@@ -108,15 +119,15 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 <!-- STAGE 1 -->
 <div id="stage1" class="stage active">
     <div class="mystic-orb" onclick="go(2)"><span>OPEN</span></div>
-    <p style="margin-top:28px;letter-spacing:6px;color:var(--gold);font-family:'Cinzel'">✨A Small Gift For You✨<br>🧧Go on… open it🧧</p>
+    <p style="margin-top:20px;letter-spacing:4px;color:var(--gold);font-family:'Cinzel'">✨A Small Gift For You✨<br>🧧Go on… open it🧧</p>
 </div>
 
 <!-- STAGE 2 -->
 <div id="stage2" class="stage">
     <div id="rain"></div>
-    <h1 style="font-family:'Cinzel Decorative';letter-spacing:10px;color:var(--gold)">🤩<br>Let’s Celebrate <br>It's Your Day</h1>
-    <p style="font-family:'Cinzel Decorative';letter-spacing:10px;color:white">⚡You're not getting older⚡<br>⚡It’s leveling up⚡</p><br>
-    <button class="btn" onclick="go(3)">🎁<br>REVEAL</button>
+    <h1 style="font-family:'Cinzel Decorative';letter-spacing:6px;color:var(--gold); font-size:clamp(1.5rem,4vw,2.2rem);">🤩<br>Let’s Celebrate <br>It's Your Day</h1>
+    <p style="font-family:'Cinzel Decorative';letter-spacing:3px;color:white; font-size:clamp(1rem,3vw,1.4rem);">⚡You're not getting older⚡<br>⚡It’s leveling up⚡</p>
+    <button class="btn" onclick="go(3)">🎁 REVEAL</button>
 </div>
 
 <!-- STAGE 3 -->
@@ -138,9 +149,9 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
         <span style="opacity:0;animation:fadeIn .5s forwards 2.8s">a</span>
         <span style="opacity:0;animation:fadeIn .5s forwards 3s">y</span>
     </div>
-    <h1 style="font-family:'Cinzel Decorative';font-size:3rem;letter-spacing:10px;margin:10px 0;background:linear-gradient(to right,#bf953f,#fcf6ba,#b38728);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;animation:glowIn 2s forwards 3.8s;">CHANDUSHREE</h1>
-    <p style="letter-spacing:6px;margin-top:10px;color:#e7d28c;opacity:0;animation:fadeUp 1.5s forwards 5s;">13 · 02 · 2026</p>
-    <button class="btn" style="color:rgb(104, 199, 199);margin-top:32px;opacity:0;animation:fadeUp 1.5s forwards 6s;" onclick="go(4)">🎂<br> FOR YOU</button>
+    <h1 style="font-family:'Cinzel Decorative';font-size:clamp(2rem,5vw,3rem);letter-spacing:6px;margin:10px 0;background:linear-gradient(to right,#bf953f,#fcf6ba,#b38728);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;animation:glowIn 2s forwards 3.8s;">CHANDUSHREE</h1>
+    <p style="letter-spacing:4px;margin-top:10px;color:#e7d28c;opacity:0;animation:fadeUp 1.5s forwards 5s; font-size:clamp(0.9rem,2.5vw,1.2rem);">13 · 02 · 2026</p>
+    <button class="btn" style="color:rgb(104, 199, 199);margin-top:20px;opacity:0;animation:fadeUp 1.5s forwards 6s;" onclick="go(4)">🎂 FOR YOU</button>
 </div>
 
 <!-- STAGE 4 -->
@@ -155,21 +166,19 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
     </div>
     <div class="blessing" style="
         max-width:820px;
-        margin:40px auto;
-        padding:30px 40px;
+        margin:30px auto;
+        padding:20px 25px;
         background: linear-gradient(135deg,#f9d423,#ff4e50);
         color:white;
         font-family:'Playfair Display',serif;
         font-style:italic;
-        font-size:clamp(1.3rem,2.2vw,1.8rem);
-        line-height:1.9;
+        font-size:clamp(1rem,2.2vw,1.5rem);
+        line-height:1.6;
         border-radius:20px;
         box-shadow:0 15px 30px rgba(0,0,0,.4);
         text-align:center;
         animation:quoteGlow 2s ease-in-out infinite alternate;
-    ">
-        “May the gods guide your steps to peaks of infinite success. May your heart always be as bright as the Golden silk of heaven. Happy Birthday, Chandushree!”
-    </div>
+    ">"May the gods guide your steps to peaks of infinite success. May your heart always be as bright as the Golden silk of heaven. Happy Birthday, Chandushree!"</div>
     <button class="btn" onclick="location.reload()">REPLAY</button>
 </div>
 
@@ -183,19 +192,18 @@ function go(n){
 
 function createRain(){
     const r=document.getElementById('rain'); r.innerHTML='';
-    const count = window.innerWidth < 600 ? 40 : 60;
+    const count = window.innerWidth < 600 ? 30 : 60;
     for(let i=0;i<count;i++){
         const d=document.createElement('div');
         d.className='drop';
         d.style.left=Math.random()*100+'vw';
-        d.style.height=10+Math.random()*18+'px';
+        d.style.height=8+Math.random()*12+'px';
         d.style.opacity=Math.random()*0.6+0.3;
         d.style.animationDuration=2.8+Math.random()*2+'s';
         r.appendChild(d);
     }
 }
 
-// AR/VR tilt effect
 document.querySelectorAll('.ar-img').forEach(img=>{
     img.addEventListener('mousemove',e=>{
         const rect=img.getBoundingClientRect();
@@ -208,7 +216,6 @@ document.querySelectorAll('.ar-img').forEach(img=>{
     img.addEventListener('mouseleave',()=>{img.style.transform='rotateY(0deg) rotateX(0deg) scale(1)';});
 });
 
-// Sequential fade-in gallery
 function animateGallery(){
     const images=document.querySelectorAll('#stage4 .ar-img');
     images.forEach((img,i)=>{setTimeout(()=>{img.style.opacity=1; img.style.transform='translateY(0) scale(1)';}, i*400);});
@@ -217,5 +224,3 @@ function animateGallery(){
 
 </body>
 </html>
-
-
