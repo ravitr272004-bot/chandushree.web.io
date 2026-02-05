@@ -34,18 +34,15 @@ html,body {width:100%; height:100%; background:#000; color:white; font-family:'M
 }
 .stage.active {opacity:1; visibility:visible; transform:scale(1);}
 
-/* STAGE 1 */
-#stage1 {background:url('bgs1.jpg') center/cover no-repeat; overflow:hidden;}
-.mystic-orb {
-    width:160px; height:160px;
-    border:2px solid var(--gold);
-    border-radius:50%;
-    display:flex; justify-content:center; align-items:center;
-    cursor:pointer;
-    animation:orbPulse 4s infinite ease-in-out;
+/* STAGE 2 */
+#stage2 {background:url('bgs1.jpg') center/cover no-repeat; overflow:hidden;}
+.drop {
+    position:absolute;
+    width:2px;
+    background:var(--gold);
+    animation:rain linear infinite;
 }
-.mystic-orb span {font-family:'Cinzel Decorative'; letter-spacing:5px; color:var(--gold);}
-@keyframes orbPulse {0%,100%{transform:scale(1); box-shadow:0 0 20px rgba(212,175,55,.25);} 50%{transform:scale(1.08); box-shadow:0 0 50px rgba(212,175,55,.5);}}
+@keyframes rain {to {transform:translateY(120vh); opacity:0;}}
 
 /* STAGE 2 */
 #stage2 {background:url('bgs2.jpg') center/cover no-repeat; overflow:hidden;}
@@ -220,4 +217,5 @@ function animateGallery(){
 
 </body>
 </html>
+
 
